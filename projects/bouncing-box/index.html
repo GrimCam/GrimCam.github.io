@@ -18,10 +18,9 @@
 			left: 0px;  /* <--- Change me! */
 		}
 		.board{
-			width: 1887;
-			height: 90vh;
+		    
+			height: 100vh;
 			background-color: rgb(77, 31, 31);
-			background-image: url("https://www.google.com/imgres?imgurl=https%3A%2F%2Fwww.publicdomainpictures.net%2Fpictures%2F140000%2Fnahled%2Fblack-swirls.jpg&tbnid=6GGj2fOL7flUyM&vet=12ahUKEwjSuvDbss6BAxWpEt4AHbEFBPEQMygdegUIARC9AQ..i&imgrefurl=https%3A%2F%2Fwww.publicdomainpictures.net%2Fen%2Fview-image.php%3Fimage%3D136435%26picture%3Dblack-swirls&docid=6K680zCYe2AehM&w=615&h=615&q=black%20swirls&client=firefox-b-1-d&ved=2ahUKEwjSuvDbss6BAxWpEt4AHbEFBPEQMygdegUIARC9AQ");
 		}
 	</style>
 	<!-- 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> -->
@@ -49,6 +48,15 @@
 			
 			// Every time the box is clicked, call the handleBoxClick Function (see below)
 			box.on('click', handleBoxClick);
+			var misClick = 0
+			window.onclick = e => {
+			if (e.target.tagName === "BODY"){
+				misClick = misClick + 1
+				console.log(misClick)
+			}
+			
+			}
+			
 			
 
 			// moves the Box to a new position on the screen along the X-Axis
@@ -78,7 +86,7 @@
 			var speedY = 10;
 			var boardHeight = jQuery(window).height();
 			var handleBoxClick = true
-			var misClick
+			
 			
 			
 			/* 
@@ -91,16 +99,17 @@
 				positionX = positionX + speed;
 				positionY = positionY + speedY;
 				moveBoxTo(positionX, positionY);
-				if (positionX > boardWidth) {
+				if (positionX > boardWidth - 70) {
 					speed = -speed
 				}else if (positionX < 0) {
 					speed = -1 * speed
 				}
-				if (positionY > boardHeight) {
+				if (positionY > boardHeight - 70) {
 					speedY = -speedY
 				}else if (positionY < 0){
 					speedY = -1 * speedY
 				}
+				
 			};
 
 			/* 
@@ -121,15 +130,22 @@
 					positionX = randNum * Math.random()
 				}
 				
+				
 
 			};
-			function endgame() {
-				misClick = (handleBoxClick === false)
-					clearinterval(interval);
-					if (misclick === 10){
-					alert("Game Over")
+			/* 
+			ending the game
+			*/
+			function endGame() {
+				
+					if (misClick === 10){
+						clearInterval(interval);
+						alert("Game Over");
+						
 					}
+					endGame()
 				}
+				
 		})();
 	</script>
 </body>
