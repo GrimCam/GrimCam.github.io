@@ -18,7 +18,8 @@
 			left: 0px;  /* <--- Change me! */
 		}
 		.board{
-			height: 100vh;
+			width: 1887;
+			height: 90vh;
 			background-color: rgb(77, 31, 31);
 			background-image: url("https://www.google.com/imgres?imgurl=https%3A%2F%2Fwww.publicdomainpictures.net%2Fpictures%2F140000%2Fnahled%2Fblack-swirls.jpg&tbnid=6GGj2fOL7flUyM&vet=12ahUKEwjSuvDbss6BAxWpEt4AHbEFBPEQMygdegUIARC9AQ..i&imgrefurl=https%3A%2F%2Fwww.publicdomainpictures.net%2Fen%2Fview-image.php%3Fimage%3D136435%26picture%3Dblack-swirls&docid=6K680zCYe2AehM&w=615&h=615&q=black%20swirls&client=firefox-b-1-d&ved=2ahUKEwjSuvDbss6BAxWpEt4AHbEFBPEQMygdegUIARC9AQ");
 		}
@@ -44,14 +45,16 @@
 			var boardWidth = board.width();	// the maximum X-Coordinate of the screen
 
 			// Every 50 milliseconds, call the update Function (see below)
-			setInterval(update, 50);
+			var interval = setInterval(update, 50);
 			
 			// Every time the box is clicked, call the handleBoxClick Function (see below)
 			box.on('click', handleBoxClick);
+			
 
 			// moves the Box to a new position on the screen along the X-Axis
-			function moveBoxTo(newPositionX) {
+			function moveBoxTo(newPositionX, newPositionY) {
 				box.css("left", newPositionX);
+				box.css("top", newPositionY);
 			}
 
 			//moves the Box to a new position on the screen along the Y-Axis
@@ -73,7 +76,8 @@
 			var speed = 10;
 			var positionY = 0;
 			var speedY = 10;
-			var boardHeight = jQuery(window).height(703);
+			var boardHeight = jQuery(window).height();
+			var handleBoxClick = true
 			
 			
 			/* 
@@ -84,14 +88,18 @@
 			function update() {
 				/* Your Code to Increas positionX by 10 HERE*/
 				positionX = positionX + speed;
-				moveBoxTo(positionX);
+				positionY = positionY + speedY;
+				moveBoxTo(positionX, positionY);
 				if (positionX > boardWidth) {
 					speed = -speed
-				}
-				if (positionX < 0) {
+				}else if (positionX < 0) {
 					speed = -1 * speed
 				}
-				moveBoxTo(positionX. positionY);
+				if (positionY > boardHeight) {
+					speedY = -speedY
+				}else if (positionY < 0){
+					speedY = -1 * speedY
+				}
 			};
 
 			/* 
@@ -108,12 +116,18 @@
 				} else if (speed < 0) {
 					speed = speed - 3
 				}
-				if (handleBoxClick = true) {
+				if (handleBoxClick === true) {
 					positionX = randNum * Math.random()
 				}
-
+				
 
 			};
+			function endgame() {
+					clearinterval(interval);
+					if (handleBoxClick === false){
+					alert("Game Over")
+					}
+				}
 		})();
 	</script>
 </body>
