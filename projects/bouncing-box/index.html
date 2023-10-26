@@ -54,7 +54,7 @@
 				misClick = misClick + 1
 				console.log(misClick)
 			}
-			
+			endGame()
 			}
 			
 			
@@ -138,12 +138,20 @@
 			*/
 			function endGame() {
 				
-					if (misClick === 10){
+					if (misClick === 5){
 						clearInterval(interval);
 						alert("Game Over");
+						setInterval(update, 50);
+						positionX = 0;
+						positionY = 0;
+						points = 0;
+						misClick = 0;
+						changeBoxText("?");
+						speed = 10
+						
 						
 					}
-					endGame()
+					
 				}
 				
 		})();

@@ -14,7 +14,6 @@ function main() {
     deathOfPlayer();
     return;
   }
-
   drawPlatforms();
   drawProjectiles();
   drawCannons();
