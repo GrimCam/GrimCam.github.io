@@ -33,7 +33,7 @@ var init = function (window) {
 
         // TODO 3 / 7 : Call the drawCircle() function 
         for (var drawing = 0; drawing < 100; drawing++){
-            drawCircle()
+        drawCircle()
         }
 
         ////////////////////////////////////////////////////////////
@@ -60,7 +60,8 @@ var init = function (window) {
             // game.checkCirclePosition(circles[4])
             // TODO 9 : Iterate over the array
            for (var i = 0; i < myArray.length; i++){
-            physikz.updatePosition(i)
+            game.checkCirclePosition(circles[i])
+            physikz.updatePosition(circles[i])
            }
             
         }
